@@ -1,0 +1,57 @@
+{
+  "name": "streaming-app",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules src/app.ts",
+    "test": "jest --forceExit"
+  },
+  "author": "Carlos Casanova <carlosctu94@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "@types/graceful-fs": "^4.1.5",
+    "express": "^4.18.2",
+    "faker-js": "^1.0.0",
+    "http-status": "^1.6.2",
+    "reflect-metadata": "^0.1.13",
+    "swagger-ui-express": "^4.6.0",
+    "tsyringe": "^4.7.0",
+    "yamljs": "^0.3.0"
+  },
+  "repository": "https://github.com/carlosctu/streaming-app-back.git",
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/jest": "^29.2.4",
+    "@types/joi": "^17.2.3",
+    "@types/supertest": "^2.0.12",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@types/typescript": "^2.0.0",
+    "@types/yamljs": "^0.2.31",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^24.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "faker": "^6.6.6",
+    "faker-br": "^0.4.1",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
+    "joi": "^17.7.0",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.1",
+    "typescript": "*"
+  },
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
