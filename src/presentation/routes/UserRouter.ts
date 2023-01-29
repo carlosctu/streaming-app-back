@@ -1,26 +1,33 @@
+import "reflect-metadata";
+import { ListUsersController } from "./../../application/controllers/user/ListUsersController";
+import { CreateUserController } from "./../../application/controllers/user/CreateUserController";
+import { tokens } from "@/di/tokens";
 import { Router } from "express";
-import { UserController } from "../../application/controllers/UserController";
-import { userSchema as userSchema } from "../../application/middlewares/schemas/UserSchema";
-import { validateBody } from "../../application/middlewares/ValidatorMiddleware";
 import { injectable, inject } from "tsyringe";
-import { ControllerAdapterType } from "../../protocols";
+import { ControllerAdapterType, IRouteController } from "./types/IRouteController";
+import { UpdateUserController } from "@/application/controllers/user/UpdateUserController";
+import { DeleteUserController } from "@/application/controllers/user/DeleteUserController";
 
 @injectable()
 export class UserRouter {
   private router = Router();
   constructor(
-    @inject("UserController")
-    private userController: UserController,
-    @inject("RouterAdapter")
-    private controllerAdapter: ControllerAdapterType
+    @inject(tokens.ControllerAdapter)
+    private controllerAdapter: ControllerAdapterType,
+    @inject(tokens.CreateUserController)
+    private createuserController: IRouteController,
+    @inject(tokens.ListUsersController)
+    private listsUserController: IRouteController,
+    @inject(tokens.UpdateUserController)
+    private updateUserController: IRouteController,
+    @inject(tokens.DeleteUserController)
+    private deleteUserController: IRouteController
   ) {}
   public setup(): Router {
-    this.router.post(
-      "/",
-      validateBody(userSchema),
-      this.controllerAdapter(this.userController)
-    );
-
+    this.router.get("/", this.controllerAdapter(this.listsUserController));
+    this.router.post("/", this.controllerAdapter(this.createuserController));
+    this.router.put("/", this.controllerAdapter(this.updateUserController));
+    this.router.delete("/", this.controllerAdapter(this.deleteUserController));
     return this.router;
   }
 }

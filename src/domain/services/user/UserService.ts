@@ -1,12 +1,12 @@
-import { IUserRepository } from "./../../../infrastructure/user/types/IUserRepository";
 import "reflect-metadata";
-import { IUserService } from "./../../../infrastructure/user/types/IUserService";
 import { injectable, inject } from "tsyringe";
 import { ObjectId } from "mongodb";
 import { tokens } from "@/di/tokens";
+import { IUserRepository } from "../../../infrastructure/user/types/IUserRepository";
+import { IUserService } from "../../../infrastructure/user/types/IUserService";
 
 @injectable()
-export class CreateUserService implements IUserService {
+export class UserService implements IUserService {
   constructor(
     @inject(tokens.UserRepository)
     private userRepository: IUserRepository

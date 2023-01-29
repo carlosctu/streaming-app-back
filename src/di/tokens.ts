@@ -10,6 +10,7 @@ export const tokens = {
   UserRouter: Symbol("UserRouter"),
 
   //Application
+  ControllerAdapter: Symbol("ControllerAdapter"),
   CreateUserController: Symbol("CreateUserController"),
   ListUsersController: Symbol("ListUsersController"),
   UpdateUserController: Symbol("UpdateUserController"),

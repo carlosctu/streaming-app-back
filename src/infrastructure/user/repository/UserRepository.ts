@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { IDatabaseClient } from "@/infrastructure/db/db";
 import { tokens } from "@/di/tokens";
 import { ObjectId } from "bson";
@@ -15,7 +16,7 @@ export class UserRepository implements IUserRepository {
   private collection: Collection<Document>;
   constructor(
     @inject(tokens.DatabaseClient)
-    private databaseClient: IDatabaseClient
+    public databaseClient: IDatabaseClient
   ) {
     this.collection = databaseClient.getInstance().collection("user");
   }
