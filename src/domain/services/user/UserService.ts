@@ -1,11 +1,19 @@
-import "reflect-metadata";
+import { IUserRepository } from "./../../../infrastructure/user/types/IUserRepository";
+import {
+  WithId,
+  Document,
+  DeleteResult,
+  InsertOneResult,
+  UpdateResult,
+} from "mongodb";
 import { injectable, inject } from "tsyringe";
-import { WithId } from "mongodb";
 import { ObjectId } from "bson";
 import { tokens } from "@/di/tokens";
-import { IUserRepository } from "../../../infrastructure/user/types/IUserRepository";
 import { IUserService } from "../../../infrastructure/user/types/IUserService";
-import { UserInfo } from "@/infrastructure/user/repository/UserRepository";
+import {
+  UserInfo,
+  UserRepository,
+} from "@/infrastructure/user/repository/UserRepository";
 
 @injectable()
 export class UserService implements IUserService {
@@ -15,16 +23,18 @@ export class UserService implements IUserService {
   ) {
     this.userRepository = userRepository;
   }
-  public createUser(): Promise<UserInfo> {
-    throw new Error("Method not implemented.");
+
+  public async createUser() {
+    const data = await this.userRepository.create({} as UserInfo);
+    return this.userRepository.create(data as any);
   }
-  public async listUsers(): Promise<any> {
+  public async listUsers() {
     return this.userRepository.list();
   }
-  public updateUser(customerId: ObjectId): Promise<UserInfo> {
-    throw new Error("Method not implemented.");
+  public async updateUser(customerId: ObjectId) {
+    return this.userRepository.update(customerId);
   }
-  public deleteUser(customerId: ObjectId): Promise<UserInfo> {
-    throw new Error("Method not implemented.");
+  public async deleteUser(customerId: ObjectId) {
+    return this.userRepository.delete(customerId);
   }
 }

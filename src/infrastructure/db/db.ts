@@ -18,7 +18,7 @@ export default class MongoDBClient implements IDatabaseClient {
     connectTimeoutMS: 30000,
     keepAlive: true,
   } as ConnectOptions);
-  private db: Db = this.client.db("streaming-app");
+  private db: Db = this.client.db("accelerate");
 
   public async connect(): Promise<void> {
     await this.client.connect();

@@ -1,12 +1,8 @@
 import "reflect-metadata";
-import { ListUsersController } from "./../../application/controllers/user/ListUsersController";
-import { CreateUserController } from "./../../application/controllers/user/CreateUserController";
 import { tokens } from "@/di/tokens";
 import { Router } from "express";
 import { injectable, inject } from "tsyringe";
 import { ControllerAdapterType, IRouteController } from "./types/IRouteController";
-import { UpdateUserController } from "@/application/controllers/user/UpdateUserController";
-import { DeleteUserController } from "@/application/controllers/user/DeleteUserController";
 
 @injectable()
 export class UserRouter {

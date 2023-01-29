@@ -10,9 +10,10 @@ import {
   UpdateResult,
   WithId,
 } from "mongodb";
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import { IUserRepository } from "./../types/IUserRepository";
 
+@injectable()
 export class UserRepository implements IUserRepository {
   private collection: Collection<Document>;
   constructor(
@@ -23,12 +24,12 @@ export class UserRepository implements IUserRepository {
   }
 
   public async create(userInfo: UserInfo): Promise<InsertOneResult<Document>> {
-    return this.collection.insertOne(userInfo);
+    return await this.collection.insertOne(userInfo);
   }
 
   public async list(): Promise<WithId<Document>[]> {
     try {
-      const data = this.collection.find().toArray();
+      const data = await this.collection.find().toArray();
       console.log(data);
       return data;
     } catch (error) {

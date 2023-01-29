@@ -23,6 +23,12 @@ childContainer.registerSingleton<MainRouter>(tokens.MainRouter, MainRouter);
 childContainer.register<ControllerAdapterType>(tokens.ControllerAdapter, {
   useValue: controllerAdapterMiddleware,
 });
+childContainer.registerSingleton<IUserRepository>(
+  tokens.UserRepository,
+  UserRepository
+);
+childContainer.registerSingleton<IUserService>(tokens.UserService, UserService);
+
 childContainer.registerSingleton<UserRouter>(tokens.UserRouter, UserRouter);
 childContainer.registerSingleton<CreateUserController>(
   tokens.CreateUserController,
@@ -40,11 +46,7 @@ childContainer.registerSingleton<DeleteUserController>(
   tokens.DeleteUserController,
   DeleteUserController
 );
-childContainer.registerSingleton<IUserService>(tokens.UserService, UserService);
-childContainer.registerSingleton<IUserRepository>(
-  tokens.UserRepository,
-  delay(() => UserRepository)
-);
+
 childContainer.registerSingleton<IDatabaseClient>(
   tokens.DatabaseClient,
   MongoDBClient

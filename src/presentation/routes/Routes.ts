@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { tokens } from "@/di/tokens";
 import { Router } from "express";
 import { inject, injectable } from "tsyringe";

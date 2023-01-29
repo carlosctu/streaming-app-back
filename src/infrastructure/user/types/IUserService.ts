@@ -1,10 +1,15 @@
-import { ObjectId } from "mongodb";
-import { UserInfo } from "../repository/UserRepository";
-import { WithId } from "mongodb";
+import { ObjectId } from "bson";
+import {
+  WithId,
+  Document,
+  InsertOneResult,
+  UpdateResult,
+  DeleteResult,
+} from "mongodb";
 
 export interface IUserService {
-  createUser(): Promise<UserInfo>;
+  createUser(): Promise<InsertOneResult<Document>>;
   listUsers(): Promise<WithId<Document>[]>;
-  updateUser(customerId: ObjectId): Promise<UserInfo>;
-  deleteUser(customerId: ObjectId): Promise<UserInfo>;
+  updateUser(customerId: ObjectId): Promise<UpdateResult>;
+  deleteUser(customerId: ObjectId): Promise<DeleteResult>;
 }

@@ -1,6 +1,6 @@
 import { UserInfo } from "../repository/UserRepository";
+import { ObjectId } from "bson";
 import {
-  ObjectId,
   InsertOneResult,
   UpdateResult,
   DeleteResult,
