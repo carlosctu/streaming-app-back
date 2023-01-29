@@ -1,9 +1,11 @@
 import "reflect-metadata";
 import { injectable, inject } from "tsyringe";
-import { ObjectId } from "mongodb";
+import { WithId } from "mongodb";
+import { ObjectId } from "bson";
 import { tokens } from "@/di/tokens";
 import { IUserRepository } from "../../../infrastructure/user/types/IUserRepository";
 import { IUserService } from "../../../infrastructure/user/types/IUserService";
+import { UserInfo } from "@/infrastructure/user/repository/UserRepository";
 
 @injectable()
 export class UserService implements IUserService {
@@ -13,16 +15,16 @@ export class UserService implements IUserService {
   ) {
     this.userRepository = userRepository;
   }
-  createUser(): Promise<unknown> {
+  public createUser(): Promise<UserInfo> {
     throw new Error("Method not implemented.");
   }
-  listUsers(): Promise<unknown> {
+  public async listUsers(): Promise<any> {
+    return this.userRepository.list();
+  }
+  public updateUser(customerId: ObjectId): Promise<UserInfo> {
     throw new Error("Method not implemented.");
   }
-  updateUser(customerId: ObjectId): Promise<unknown> {
-    throw new Error("Method not implemented.");
-  }
-  deleteUser(customerId: ObjectId): Promise<unknown> {
+  public deleteUser(customerId: ObjectId): Promise<UserInfo> {
     throw new Error("Method not implemented.");
   }
 }

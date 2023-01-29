@@ -7,6 +7,7 @@ import {
   InsertOneResult,
   Document,
   DeleteResult,
+  UpdateResult,
   WithId,
 } from "mongodb";
 import { inject } from "tsyringe";
@@ -21,19 +22,26 @@ export class UserRepository implements IUserRepository {
     this.collection = databaseClient.getInstance().collection("user");
   }
 
-  async create(userInfo: UserInfo): Promise<InsertOneResult<Document>> {
+  public async create(userInfo: UserInfo): Promise<InsertOneResult<Document>> {
     return this.collection.insertOne(userInfo);
   }
 
-  async list(): Promise<WithId<Document>[]> {
-    return this.collection.find().toArray();
+  public async list(): Promise<WithId<Document>[]> {
+    try {
+      const data = this.collection.find().toArray();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new Error();
+    }
   }
 
-  async update(customerId: ObjectId): Promise<unknown> {
+  public async update(customerId: ObjectId): Promise<UpdateResult> {
     throw new Error("Method not implemented.");
   }
 
-  async delete(customerId: ObjectId): Promise<DeleteResult> {
+  public async delete(customerId: ObjectId): Promise<DeleteResult> {
     return this.collection.deleteOne({ _id: customerId });
   }
 }

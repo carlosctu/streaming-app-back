@@ -1,10 +1,16 @@
-import { ObjectId } from "mongodb";
 import { UserInfo } from "../repository/UserRepository";
-import { InsertOneResult, DeleteResult, WithId, Document } from "mongodb";
+import {
+  ObjectId,
+  InsertOneResult,
+  UpdateResult,
+  DeleteResult,
+  WithId,
+  Document,
+} from "mongodb";
 
 export interface IUserRepository {
   create(userInfo: UserInfo): Promise<InsertOneResult<Document>>;
   list(): Promise<WithId<Document>[]>;
-  update(customerId: ObjectId): Promise<unknown>;
+  update(customerId: ObjectId): Promise<UpdateResult>;
   delete(customerId: ObjectId): Promise<DeleteResult>;
 }

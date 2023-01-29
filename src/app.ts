@@ -26,7 +26,7 @@ mongoClient
   });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Magic happens on port ${process.env.port}`);
+  console.log(`Magic happens on port ${process.env.PORT}`);
 });
 
 export default app;

@@ -14,6 +14,10 @@ export class ListUsersController implements IBaseController {
     this.userService = userService;
   }
   async handle(req: Request, res: Response): Promise<Response> {
-    return res.sendStatus(httpStatus.OK);
+    const usersList = await this.userService.listUsers();
+    return res.status(httpStatus.OK).send({
+      status: "success",
+      data: usersList,
+    });
   }
 }
