@@ -1,3 +1,4 @@
+import { IUserInfo } from "./../repository/UserRepository";
 import { ObjectId } from "bson";
 import {
   WithId,
@@ -8,7 +9,7 @@ import {
 } from "mongodb";
 
 export interface IUserService {
-  createUser(): Promise<InsertOneResult<Document>>;
+  createUser(entity: IUserInfo): Promise<InsertOneResult<Document>>;
   listUsers(): Promise<WithId<Document>[]>;
   updateUser(customerId: ObjectId): Promise<UpdateResult>;
   deleteUser(customerId: ObjectId): Promise<DeleteResult>;

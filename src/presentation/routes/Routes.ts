@@ -1,7 +1,7 @@
 import { tokens } from "@/di/tokens";
 import { Router } from "express";
 import { inject, injectable } from "tsyringe";
-import { UserRouter } from "./UserRouter";
+import { UserRouter } from "./user/UserRouter";
 
 @injectable()
 export class MainRouter {

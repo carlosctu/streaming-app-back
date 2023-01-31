@@ -23,17 +23,19 @@ export class UserRepository implements IUserRepository {
     this.collection = databaseClient.getInstance().collection("user");
   }
 
-  public async create(userInfo: UserInfo): Promise<InsertOneResult<Document>> {
-    return await this.collection.insertOne(userInfo);
+  public create(newUser: IUserInfo) {
+    try {
+      return this.collection.insertOne(newUser);
+    } catch (error) {
+      throw new Error();
+    }
   }
 
-  public async list(): Promise<WithId<Document>[]> {
+  public async list() {
     try {
       const data = await this.collection.find().toArray();
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
       throw new Error();
     }
   }
@@ -47,7 +49,7 @@ export class UserRepository implements IUserRepository {
   }
 }
 
-export interface UserInfo extends Document {
+export interface IUserInfo extends Document {
   _id?: ObjectId;
   name: string;
   email: string;

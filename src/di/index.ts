@@ -2,7 +2,7 @@ import { DeleteUserController } from "./../application/controllers/user/DeleteUs
 import { UpdateUserController } from "./../application/controllers/user/UpdateUserController";
 import { ListUsersController } from "./../application/controllers/user/ListUsersController";
 import { CreateUserController } from "./../application/controllers/user/CreateUserController";
-import { UserRouter } from "./../presentation/routes/UserRouter";
+import { UserRouter } from "../presentation/routes/user/UserRouter";
 import { tokens } from "./tokens";
 import { container, delay } from "tsyringe";
 import { MainRouter } from "@/presentation/routes/Routes";

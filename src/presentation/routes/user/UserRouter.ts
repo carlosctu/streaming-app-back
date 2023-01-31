@@ -2,7 +2,12 @@ import "reflect-metadata";
 import { tokens } from "@/di/tokens";
 import { Router } from "express";
 import { injectable, inject } from "tsyringe";
-import { ControllerAdapterType, IRouteController } from "./types/IRouteController";
+import {
+  ControllerAdapterType,
+  IRouteController,
+} from "../types/IRouteController";
+import { validateBody } from "@/application/middlewares/ValidatorMiddleware";
+import { userSchema } from "@/application/middlewares/schemas/UserSchema";
 
 @injectable()
 export class UserRouter {
@@ -21,7 +26,11 @@ export class UserRouter {
   ) {}
   public setup(): Router {
     this.router.get("/", this.controllerAdapter(this.listsUserController));
-    this.router.post("/", this.controllerAdapter(this.createuserController));
+    this.router.post(
+      "/",
+      validateBody(userSchema),
+      this.controllerAdapter(this.createuserController)
+    );
     this.router.put("/", this.controllerAdapter(this.updateUserController));
     this.router.delete("/", this.controllerAdapter(this.deleteUserController));
     return this.router;

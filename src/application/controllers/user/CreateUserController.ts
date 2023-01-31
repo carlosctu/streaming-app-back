@@ -1,3 +1,4 @@
+import { IUserInfo } from "./../../../infrastructure/user/repository/UserRepository";
 import { IUserService } from "./../../../infrastructure/user/types/IUserService";
 import { tokens } from "./../../../di/tokens";
 import { Request, Response } from "express";
@@ -36,6 +37,15 @@ export class CreateUserController implements IBaseController {
     this.userService = userService;
   }
   async handle(req: Request, res: Response): Promise<Response> {
-    return res.sendStatus(httpStatus.BAD_REQUEST);
+    const newUser = req.body as IUserInfo;
+    try {
+      const result = await this.userService.createUser(newUser);
+      return res
+        .status(httpStatus.CREATED)
+        .send({ status: "success", data: result });
+    } catch (error) {
+      console.log(error)
+      return res.sendStatus(httpStatus.UNPROCESSABLE_ENTITY);
+    }
   }
 }

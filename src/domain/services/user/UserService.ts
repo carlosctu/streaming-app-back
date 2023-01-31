@@ -11,7 +11,7 @@ import { ObjectId } from "bson";
 import { tokens } from "@/di/tokens";
 import { IUserService } from "../../../infrastructure/user/types/IUserService";
 import {
-  UserInfo,
+  IUserInfo,
   UserRepository,
 } from "@/infrastructure/user/repository/UserRepository";
 
@@ -24,11 +24,10 @@ export class UserService implements IUserService {
     this.userRepository = userRepository;
   }
 
-  public async createUser() {
-    const data = await this.userRepository.create({} as UserInfo);
-    return this.userRepository.create(data as any);
+  public createUser(entity: IUserInfo) {
+    return this.userRepository.create(entity);
   }
-  public async listUsers() {
+  public listUsers() {
     return this.userRepository.list();
   }
   public async updateUser(customerId: ObjectId) {

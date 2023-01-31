@@ -1,4 +1,4 @@
-import { UserInfo } from "../repository/UserRepository";
+import { IUserInfo } from "../repository/UserRepository";
 import { ObjectId } from "bson";
 import {
   InsertOneResult,
@@ -9,7 +9,7 @@ import {
 } from "mongodb";
 
 export interface IUserRepository {
-  create(userInfo: UserInfo): Promise<InsertOneResult<Document>>;
+  create(userInfo: IUserInfo): Promise<InsertOneResult<Document>>;
   list(): Promise<WithId<Document>[]>;
   update(customerId: ObjectId): Promise<UpdateResult>;
   delete(customerId: ObjectId): Promise<DeleteResult>;
