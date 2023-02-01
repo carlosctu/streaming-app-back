@@ -14,6 +14,7 @@ import {
   IUserInfo,
   UserRepository,
 } from "@/infrastructure/user/repository/UserRepository";
+import bcrypt from "bcrypt";
 
 @injectable()
 export class UserService implements IUserService {
@@ -24,7 +25,8 @@ export class UserService implements IUserService {
     this.userRepository = userRepository;
   }
 
-  public createUser(entity: IUserInfo) {
+  public async createUser(entity: IUserInfo) {
+    entity["password"] = await bcrypt.hash(entity.password, 12);
     return this.userRepository.create(entity);
   }
   public listUsers() {
