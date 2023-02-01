@@ -16,7 +16,9 @@ services:
       - 4000:3000
     environment:
       PORT: 3000
+      CORSHEADER: "http://localhost:3000"
       MONGO_URI: mongodb://mongo_db:27017
+      PROXY: "true"
     depends_on:
       - mongo_db
 

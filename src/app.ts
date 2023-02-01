@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { container } from "./di";
 import { MainRouter } from "./presentation/routes/Routes";
 import { IDatabaseClient } from "./infrastructure/db/db";
+import helmet from "helmet";
 
 const app = express();
 const router = container.resolve<MainRouter>(tokens.MainRouter);
@@ -13,8 +14,11 @@ const mongoClient = container.resolve<IDatabaseClient>(tokens.DatabaseClient);
 
 dotenv.config();
 
-app.use(express.json()).use(router.setup()).use(cors());
-
+app.use(cors());
+app.options('*', cors());
+app.use(helmet());
+app.use(express.json());
+app.use(router.setup());
 mongoClient
   .connect()
   .then(() => {
